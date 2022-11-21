@@ -26,7 +26,9 @@ const SearchBoxInput = styled.input`
     outline: none;
   }
 `;
-const accessKey = "QJdB1LqVNTR2zvNuim_k5nGByBdqtXjcI_igqVsPAGg";
+
+const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
+
 const count = 30;
 
 const getImages = async () => {
