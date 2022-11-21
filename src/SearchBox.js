@@ -4,7 +4,7 @@ import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
 
-const SearchHeader = styled.div`
+const Header = styled.div`
   width: 100%;
   height: 100px;
   display: flex;
@@ -70,7 +70,7 @@ const getSearchImages = async (searchPrompt, page) => {
   }
 };
 
-function SearchBox() {
+function Page() {
   const [searchText, setSearchText] = React.useState("");
   const [scrollCounter, setScrollCounter] = React.useState(1);
   const [images, setImages] = React.useState([]);
@@ -106,7 +106,7 @@ function SearchBox() {
 
   return (
     <>
-      <SearchHeader>
+      <Header>
         <SearchBoxInput
           value={searchText}
           placeholder="Search free high-resolution photos"
@@ -121,14 +121,20 @@ function SearchBox() {
             }
           }}
         />
-      </SearchHeader>
+      </Header>
 
       <InfiniteScroll
         dataLength={images?.length}
         next={fetchDataOnScroll}
         hasMore={true}
       >
-        <div style={{ padding: "10px", maxWidth: "1330px", margin: "0 auto" }}>
+        <div
+          style={{
+            padding: "0 10px 10px",
+            maxWidth: "1330px",
+            margin: "0 auto",
+          }}
+        >
           <ResponsiveMasonry
             columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
           >
@@ -149,4 +155,4 @@ function SearchBox() {
   );
 }
 
-export default SearchBox;
+export default Page;
