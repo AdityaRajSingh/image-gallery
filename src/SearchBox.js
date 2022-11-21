@@ -25,6 +25,14 @@ const SearchBoxInput = styled.input`
     border: none;
     outline: none;
   }
+
+  @media (max-width: 560px) {
+    width: 90%;
+  }
+
+  @media (max-width: 440px) {
+    width: 85%;
+  }
 `;
 
 const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
