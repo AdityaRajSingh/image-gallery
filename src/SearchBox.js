@@ -10,7 +10,6 @@ const SearchHeader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #475766;
 `;
 
 const SearchBoxInput = styled.input`
@@ -20,7 +19,7 @@ const SearchBoxInput = styled.input`
   border: none;
   font-size: 16px;
   padding: 15px 16px;
-
+  background: #eeeeee;
   &:focus {
     border: none;
     outline: none;
