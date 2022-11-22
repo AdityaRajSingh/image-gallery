@@ -1,74 +1,8 @@
 import React from "react";
-import styled from "styled-components";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 import InfiniteScroll from "react-infinite-scroll-component";
-import axios from "axios";
-
-const Header = styled.div`
-  width: 100%;
-  height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const SearchBoxInput = styled.input`
-  width: 500px;
-  height: 25px;
-  border-radius: 16px;
-  border: none;
-  font-size: 16px;
-  padding: 15px 16px;
-  background: #eeeeee;
-  &:focus {
-    border: none;
-    outline: none;
-  }
-
-  @media (max-width: 560px) {
-    width: 90%;
-  }
-
-  @media (max-width: 440px) {
-    width: 85%;
-  }
-`;
-
-const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS_KEY;
-
-const count = 30;
-
-const getImages = async () => {
-  try {
-    const imagesURL = `https://api.unsplash.com/photos/random?client_id=${accessKey}&count=${count}`;
-
-    const response = await axios.get(imagesURL);
-    const data = response.data;
-
-    let imageURLs = [];
-    data.forEach((data) => {
-      imageURLs.push(data.urls.small);
-    });
-    return imageURLs;
-  } catch (err) {
-    console.log("err", err.response.data);
-  }
-};
-
-const getSearchImages = async (searchPrompt, page) => {
-  try {
-    const imagesURL = `https://api.unsplash.com/search/photos?client_id=${accessKey}&query=${searchPrompt}&per_page=${count}&page=${page}`;
-    const response = await axios.get(imagesURL);
-    const data = response.data.results;
-    let imageURLs = [];
-    data.forEach((data) => {
-      imageURLs.push(data.urls.small);
-    });
-    return imageURLs;
-  } catch (err) {
-    console.log("err", err.response.data);
-  }
-};
+import { getImages, getSearchImages } from "./utility";
+import { Gallery, Image, Header, SearchBoxInput } from "./StyledComponents";
 
 function Page() {
   const [searchText, setSearchText] = React.useState("");
@@ -128,28 +62,17 @@ function Page() {
         next={fetchDataOnScroll}
         hasMore={true}
       >
-        <div
-          style={{
-            padding: "0 10px 10px",
-            maxWidth: "1330px",
-            margin: "0 auto",
-          }}
-        >
+        <Gallery>
           <ResponsiveMasonry
             columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
           >
             <Masonry gutter="10px">
               {images?.map((image, i) => (
-                <img
-                  key={i}
-                  src={image}
-                  style={{ width: "100%", display: "block" }}
-                  alt=""
-                />
+                <Image key={i} src={image} alt="" />
               ))}
             </Masonry>
           </ResponsiveMasonry>
-        </div>
+        </Gallery>
       </InfiniteScroll>
     </>
   );
