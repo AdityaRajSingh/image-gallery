@@ -32,7 +32,7 @@ export const SearchBoxInput = styled.input`
 
 export const Gallery = styled.div`
   padding: 0 10px 10px;
-  maxwidth: 1330px;
+  max-width: 1330px;
   margin: 0 auto;
 `;
 
